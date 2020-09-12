@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>guru.springframework</groupId>
     <artifactId>mrh-pet-clinic</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>mrh-pet-clinic</name>
     <description>MRH Pet Clinic Project</description>
     <packaging>pom</packaging>
