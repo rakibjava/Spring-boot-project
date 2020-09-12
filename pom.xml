@@ -46,6 +46,5 @@
     </build>
     <scm>
         <developerConnection>scm:git:https://github.com/mrakibhasan/mrh-pet-clinic.git</developerConnection>
-        <tag>mrh-pet-clinic-0.0.2</tag>
   </scm>
 </project>
