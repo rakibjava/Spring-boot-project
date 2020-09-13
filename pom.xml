@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>guru.springframework</groupId>
     <artifactId>mrh-pet-clinic</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>mrh-pet-clinic</name>
     <description>MRH Pet Clinic Project</description>
     <packaging>pom</packaging>
@@ -48,6 +48,6 @@
         <url>https://github.com/mrakibhasan/mrh-pet-clinic.git</url>
         <connection>scm:git:https://github.com/mrakibhasan/mrh-pet-clinic.git</connection>
         <developerConnection>scm:git:https://github.com/mrakibhasan/mrh-pet-clinic.git</developerConnection>
-        <tag>mrh-pet-clinic-0.0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
