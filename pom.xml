@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>guru.springframework</groupId>
     <artifactId>mrh-pet-clinic</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>mrh-pet-clinic</name>
     <description>MRH Pet Clinic Project</description>
     <packaging>pom</packaging>
@@ -36,7 +36,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>install</goals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <checkModificationExcludes>pom.xml</checkModificationExcludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+    <scm>
+        <developerConnection>scm:git:git@https://github.com/mrakibhasan/mrh-pet-clinic.git</developerConnection>
+        <!--<tag>HEAD</tag>-->
+      <tag>mrh-pet-clinic-0.0.1</tag>
+  </scm>
 </project>
