@@ -1,4 +1,4 @@
-package guru.springframework.mrhpetclcinic.model.map;
+package guru.springframework.mrhpetclcinic.service.map;
 
 
 import java.util.*;

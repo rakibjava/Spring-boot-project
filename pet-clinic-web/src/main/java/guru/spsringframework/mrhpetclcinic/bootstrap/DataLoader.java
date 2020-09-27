@@ -1,9 +1,8 @@
 package guru.spsringframework.mrhpetclcinic.bootstrap;
 
+
 import guru.springframework.mrhpetclcinic.model.Owner;
 import guru.springframework.mrhpetclcinic.model.Vet;
-import guru.springframework.mrhpetclcinic.model.map.OwnerServiceMap;
-import guru.springframework.mrhpetclcinic.model.map.VetServiceMap;
 import guru.springframework.mrhpetclcinic.service.OwnerService;
 import guru.springframework.mrhpetclcinic.service.VetService;
 import org.springframework.boot.CommandLineRunner;
@@ -12,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
-    private VetService vetService;
+    private final VetService vetService;
 
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override

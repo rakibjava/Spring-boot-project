@@ -1,11 +1,12 @@
-package guru.springframework.mrhpetclcinic.model.map;
+package guru.springframework.mrhpetclcinic.service.map;
 
 import guru.springframework.mrhpetclcinic.model.Owner;
-import guru.springframework.mrhpetclcinic.service.CrudService;
 import guru.springframework.mrhpetclcinic.service.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements OwnerService {
 
     @Override
