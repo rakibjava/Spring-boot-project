@@ -10,7 +10,7 @@
     <artifactId>pet-clinic-web</artifactId>
    <!-- <properties>
         <java.version>1.8</java.version>
-        <start-class>guru.spsringframework.mrhpetclcinic.MrhPetClinicApplication</start-class>
+        <start-class>MrhPetClinicApplication</start-class>
     </properties>-->
     <dependencies>
         <dependency>
