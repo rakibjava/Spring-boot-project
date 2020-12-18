@@ -1,17 +1,14 @@
-package guru.springframework.mrhpetclcinic.restcontroller;
+package guru.springframework.mrhpetclcinic.controller;
 
 import guru.springframework.mrhpetclcinic.model.Owner;
 import guru.springframework.mrhpetclcinic.model.Pet;
 import guru.springframework.mrhpetclcinic.model.PetType;
-import guru.springframework.mrhpetclcinic.model.Visit;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.OwnerService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.PetService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.PetTypeService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.VisitService;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController

@@ -1,4 +1,4 @@
-package guru.springframework.mrhpetclcinic.restcontroller;
+package guru.springframework.mrhpetclcinic.controller;
 
 import guru.springframework.mrhpetclcinic.model.Vet;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.VetService;

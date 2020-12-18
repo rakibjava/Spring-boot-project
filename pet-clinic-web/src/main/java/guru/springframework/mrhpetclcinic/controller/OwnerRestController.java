@@ -1,4 +1,4 @@
-package guru.springframework.mrhpetclcinic.restcontroller;
+package guru.springframework.mrhpetclcinic.controller;
 
 import guru.springframework.mrhpetclcinic.model.Owner;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.OwnerService;
@@ -7,7 +7,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 
 @RestController
