@@ -1,6 +1,6 @@
 package guru.springframework.mrhpetclcinic.service;
 
-import guru.springframework.mrhpetclcinic.model.Speciality;
+import guru.springframework.mrhpetclcinic.model.Specialty;
 import guru.springframework.mrhpetclcinic.repository.SpecialityRepository;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.SpecialityService;
 import org.springframework.stereotype.Service;
@@ -18,24 +18,24 @@ public class SpecialityServiceMap implements SpecialityService {
 
 
     @Override
-    public Set<Speciality> findAll() {
-        Set<Speciality> vetSpeciality= new HashSet<>();
+    public Set<Specialty> findAll() {
+        Set<Specialty> vetSpeciality= new HashSet<>();
         specialityRepository.findAll().forEach(vetSpeciality::add);
         return vetSpeciality;
     }
 
     @Override
-    public Speciality findById(Long aLong) {
+    public Specialty findById(Long aLong) {
         return specialityRepository.findById(aLong).orElse(null);
     }
 
     @Override
-    public Speciality save(Speciality object) {
+    public Specialty save(Specialty object) {
         return specialityRepository.save(object);
     }
 
     @Override
-    public void delete(Speciality object) {
+    public void delete(Specialty object) {
         specialityRepository.delete(object);
     }
 

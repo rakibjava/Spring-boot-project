@@ -37,21 +37,6 @@ public class DataLoaderSDJPA implements CommandLineRunner {
 
     private void loadData() {
 
-
-        /**/
-
-        /*Speciality radiology = new Speciality();
-        radiology.setDescription("radiology");
-        Speciality savedradiology = specialityService.save(radiology);
-
-        Speciality surgery = new Speciality();
-        surgery.setDescription("surgery");
-        Speciality savedsurgery = specialityService.save(surgery);
-
-        Speciality dentistry = new Speciality();
-        dentistry.setDescription("dentistry");
-        Speciality saveddentistry = specialityService.save(dentistry);*/
-
         Owner owner1 = new Owner();
         owner1.setFirstName("Michel");
         owner1.setLastName("Weston");
@@ -109,19 +94,37 @@ public class DataLoaderSDJPA implements CommandLineRunner {
         System.out.println("Owners-2 Loaded............"+owner2);
 
 
-        /*Vet vet1 = new Vet();
+        Specialty radiology = new Specialty();
+        radiology.setDescription("radiology");
+
+        //no need save vet will save specialties because in vet define cascade type persist and merge
+        //Specialty savedRadiology = specialityService.save(radiology);
+
+        Specialty surgery = new Specialty();
+        surgery.setDescription("surgery");
+        //no need save vet will save specialties because in vet define cascade type persist and merge
+        //Specialty savedSurgery = specialityService.save(surgery);
+
+        Specialty dentistry = new Specialty();
+        dentistry.setDescription("dentistry");
+        //no need save vet will save specialties because in vet define cascade type persist and merge
+        //Specialty savedDentistry = specialityService.save(dentistry);
+
+        Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
-        vet1.getSpecialities().add(savedradiology);
+        vet1.getSpecialities().add(radiology);
+        vet1.getSpecialities().add(dentistry);
+        //vet1.getSpecialities().add(surgery);
         vetService.save(vet1);
         System.out.println("Vet1 Loaded............"+vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Jessi");
         vet2.setLastName("Porter");
-        vet2.getSpecialities().add(savedsurgery);
+        vet2.getSpecialities().add(surgery);
         vetService.save(vet2);
 
-        System.out.println("Vet2 Loaded............"+vet2);*/
+        System.out.println("Vet2 Loaded............"+vet2);
     }
 }

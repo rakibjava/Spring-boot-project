@@ -18,7 +18,7 @@ public class PetRestController {
     public OwnerService ownerService;
     public PetService petService;
     public PetTypeService petTypeService;
-    VisitService visitService;
+    public VisitService visitService;
 
     public PetRestController(OwnerService ownerService, PetService petService,PetTypeService petTypeService,
                              VisitService visitService) {
@@ -68,7 +68,7 @@ public class PetRestController {
 
         PetType petType = petByownerid.getPetType();//petTypeService.findById(petByownerid.getPetType().getId());
         petType.setName(pet.getPetType().getName());
-        petTypeService.save(petType);
+        //petTypeService.save(petType);
 
         petByownerid.setPetType(petType);
         petByownerid.setBirthDate(pet.getBirthDate());

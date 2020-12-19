@@ -5,6 +5,7 @@ import guru.springframework.mrhpetclcinic.model.Visit;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.OwnerService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.PetService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.VisitService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -32,9 +33,9 @@ public class VisitRestController {
 
     // http://localhost:7070//pet/{petid}/visit/
     @PostMapping
-    @RequestMapping("/{petid}/visit/")
-    public Pet addVisit(@RequestBody Visit visit, @PathVariable(name = "petid") Long petid){
-        Pet petByVisit = petService.findById(petid);
+    @RequestMapping("/{petId}/visit/")
+    public Pet addVisit(@RequestBody Visit visit, @PathVariable(name = "petId") Long petId){
+        Pet petByVisit = petService.findById(petId);
         visit.setPet(petByVisit);
         visitService.save(visit);
         //visit.setPet(petByVisit);
@@ -42,5 +43,28 @@ public class VisitRestController {
         //petService.save(petByVisit);
         return petByVisit;
     }
+
+    // http://localhost:7070//pet//{petId}/visit/{visitId}/
+    @PutMapping
+    @RequestMapping("/{petId}/visit/{visitId}/")
+    public Pet updateVisit (@PathVariable(name = "petId") Long petId,@PathVariable(name = "visitId") Long visitId,
+                            @RequestBody Visit visit){
+        Pet pet = petService.findById(petId);
+        Visit visit1 = visitService.findById(visitId);
+        visit1.setDescription(visit.getDescription());
+        visit1.setDate(visit.getDate());
+        visitService.save(visit1);
+        visit1.setPet(pet);
+        return  pet;
+    }
+
+    // http://localhost:7070//pet/visit/delete/{visitId}/
+    @DeleteMapping
+    @RequestMapping("/visit/delete/{visitId}/")
+    public ResponseEntity<?> deleteVisit (@PathVariable(name = "visitId") Long visitId){
+        visitService.deleteById(visitId);
+        return  ResponseEntity.ok().build();
+    }
+
 
 }
