@@ -2,6 +2,7 @@ package guru.springframework.mrhpetclcinic.bootstrap;
 
 
 import guru.springframework.mrhpetclcinic.model.*;
+import guru.springframework.mrhpetclcinic.model.ManyToMany.*;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,14 +18,24 @@ public class DataLoaderSDJPA implements CommandLineRunner {
     private final VisitService visitService;
     private final PetService petService;
 
+
+    private final VetM2mService vetM2mService;
+    private final SpecialtyM2mService specialtyM2mService;
+
+    //private  final Sp specialtyM2MRepository;
+
     public DataLoaderSDJPA(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-                           SpecialityService specialityService, VisitService visitService, PetService petService) {
+                           SpecialityService specialityService, VisitService visitService, PetService petService,
+                           VetM2mService vetM2mService, SpecialtyM2mService specialtyM2mService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
         this.visitService = visitService;
         this.petService = petService;
+
+        this.vetM2mService = vetM2mService;
+        this.specialtyM2mService = specialtyM2mService;
     }
 
     @Override
@@ -126,5 +137,50 @@ public class DataLoaderSDJPA implements CommandLineRunner {
         vetService.save(vet2);
 
         System.out.println("Vet2 Loaded............"+vet2);
+
+
+        SpecialtyM2M specialtyM2MVet1 = new SpecialtyM2M();
+        specialtyM2MVet1.setDescription("cat_specialist");
+
+        SpecialtyM2M specialtyM2MVet2 = new SpecialtyM2M();
+        specialtyM2MVet2.setDescription("Bird_specialist");
+
+        SpecialtyM2M specialtyM2MVet3 = new SpecialtyM2M();
+        specialtyM2MVet3.setDescription("Dog_specialist");
+
+
+        VetM2M vetM2MSpecialty1 = new VetM2M();
+        vetM2MSpecialty1.setFirstName("Sam1");
+        vetM2MSpecialty1.setLastName("Axe1");
+        vetM2MSpecialty1.addSpeciality(specialtyM2MVet1);
+        vetM2MSpecialty1.addSpeciality(specialtyM2MVet2);
+
+
+        //specialtyM2MVet1.getVetM2MSpecialties().add(vetM2MSpecialty1);
+        //specialtyM2MVet2.getVetM2MSpecialties().add(vetM2MSpecialty1);
+
+        vetM2mService.save(vetM2MSpecialty1);
+
+        System.out.println("VetM2MSpecialty1 Loaded............"+vetM2MSpecialty1);
+
+        VetM2M vetM2MSpecialty2 = new VetM2M();
+        vetM2MSpecialty2.setFirstName("Jessi1");
+        vetM2MSpecialty2.setLastName("Porter1");
+
+        vetM2MSpecialty2.addSpeciality(specialtyM2MVet3);
+
+
+        //specialtyM2MVet1.getVetM2MSpecialties().add(specialtyM2MVet3);
+        //specialtyM2MVet2.getVetM2MSpecialties().add(vetM2MSpecialty2);
+
+       // specialtyM2MVet3.getVetM2MSpecialties().add(vetM2MSpecialty2);
+
+        vetM2mService.save(vetM2MSpecialty2);
+
+        specialtyM2MVet3.getVetM2MSpecialties().add(vetM2MSpecialty1);
+        specialtyM2MVet3.getVetM2MSpecialties().add(vetM2MSpecialty2);
+        specialtyM2mService.save(specialtyM2MVet3);
+
+        System.out.println("vetM2MSpecialty2 Loaded............"+vetM2MSpecialty2);
     }
 }
