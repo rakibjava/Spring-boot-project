@@ -11,7 +11,7 @@ public class OrganizationBi {
     private String name;
     private String orgId;
 
-    //JoinColumn in Parent side and mappedBy in child side mean Parent table parent table will store the
+    //JoinColumn in Parent side and mappedBy in child side mean parent table will store the
     // foreign key means hold the child table primary key
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_biDirection_id",referencedColumnName = "id")

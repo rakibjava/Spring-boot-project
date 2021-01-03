@@ -1,8 +1,8 @@
 package guru.springframework.mrhpetclcinic.controller;
 
 
-import guru.springframework.mrhpetclcinic.model.ManyToMany.VetM2M;
-import guru.springframework.mrhpetclcinic.model.ManyToMany.VetM2mService;
+import guru.springframework.mrhpetclcinic.ManyToMany.VetM2M;
+import guru.springframework.mrhpetclcinic.ManyToMany.VetM2mService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package guru.springframework.mrhpetclcinic.bootstrap;
 
 
 import guru.springframework.mrhpetclcinic.model.*;
-import guru.springframework.mrhpetclcinic.model.ManyToMany.*;
+import guru.springframework.mrhpetclcinic.ManyToMany.*;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
