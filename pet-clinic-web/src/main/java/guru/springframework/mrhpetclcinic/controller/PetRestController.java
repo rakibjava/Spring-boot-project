@@ -1,5 +1,6 @@
 package guru.springframework.mrhpetclcinic.controller;
 
+import guru.springframework.mrhpetclcinic.exception.handling.ExceptionReason;
 import guru.springframework.mrhpetclcinic.model.Owner;
 import guru.springframework.mrhpetclcinic.model.Pet;
 import guru.springframework.mrhpetclcinic.model.PetType;
@@ -7,6 +8,8 @@ import guru.springframework.mrhpetclcinic.service.serviceinterface.OwnerService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.PetService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.PetTypeService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.VisitService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -29,21 +32,24 @@ public class PetRestController {
     }
     // http://localhost:7070//owner/pets/{petId}/
     @GetMapping("/pets/{petId}/")
-    public Pet getPet(@PathVariable("petId") Long petId) {
+    public ResponseEntity<Pet> getPet(@PathVariable("petId") Long petId) {
         Pet pet = petService.findById(petId);
-        return pet;
+        if(pet == null)
+            throw new ExceptionReason("There is no pet with id:"+ petId );
+        else
+            return new ResponseEntity<>(pet, HttpStatus.OK);
     }
 
     // http://localhost:7070//owner/pets/
     @GetMapping("/pets/")
-    public Set<Pet> getAllPet() {
+    public ResponseEntity<Set<Pet>> getAllPet() {
         Set<Pet> pet = petService.findAll();
-        return pet;
+        return new ResponseEntity<>(pet,HttpStatus.OK);
     }
 
     // http://localhost:7070//owner/{ownerid}/pet/
     @PostMapping("/{ownerid}/pet/")
-    public Pet addPet(@RequestBody Pet pet, @PathVariable(name = "ownerid") Long ownerid){
+    public ResponseEntity<Pet> addPet(@RequestBody Pet pet, @PathVariable(name = "ownerid") Long ownerid){
         Owner owner = ownerService.findById(ownerid);
         owner.getPets().add(pet);
         //Pet p= petService.save(pet);
@@ -56,13 +62,13 @@ public class PetRestController {
             v.setPet(pet);
             pet.getVisits().add(v);
         }*/
-        return  petService.save(pet);
+        return  new ResponseEntity<>(petService.save(pet),HttpStatus.CREATED);
     }
     // http://localhost:7070//owner/{ownerid}/pet/{petid}
     @PutMapping("/{ownerid}/pet/{petid}")
-    public Owner updatePet(@RequestBody Pet pet, @PathVariable(name = "ownerid") Long ownerid,@PathVariable(name = "petid") Long petid){
+    public ResponseEntity<Owner> updatePet(@RequestBody Pet pet, @PathVariable(name = "ownerid") Long ownerid,
+                                           @PathVariable(name = "petid") Long petid){
         Owner owner = ownerService.findById(ownerid);
-
         Pet petByownerid = petService.findById(petid);
         petByownerid.setName(pet.getName());
 
@@ -76,11 +82,11 @@ public class PetRestController {
         petService.save(petByownerid);
 
         owner.getPets().add(petByownerid);
-        return owner;
+        return new ResponseEntity<>(owner,HttpStatus.OK);
     }
     //http://localhost:7070//owner/{ownerid}/deletpet/{petid}/
     @DeleteMapping("/{ownerid}/deletpet/{petId}/")
-    public Owner deletePet(@PathVariable(name = "ownerid") Long ownerid,@PathVariable("petId") Long petId) {
+    public ResponseEntity<Owner> deletePet(@PathVariable(name = "ownerid") Long ownerid,@PathVariable("petId") Long petId) {
        Owner owner = ownerService.findById(ownerid);
        Pet pet = petService.findById(petId);
        //owner.getPets().remove(pet);
@@ -88,6 +94,6 @@ public class PetRestController {
 
        petService.deleteById(petId);
         //petTypeService.deleteById(petId);
-       return ownerService.findById(ownerid);
+       return new ResponseEntity<>(ownerService.findById(ownerid),HttpStatus.OK);
     }
 }

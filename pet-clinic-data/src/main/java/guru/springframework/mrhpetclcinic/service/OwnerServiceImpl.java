@@ -5,6 +5,8 @@ import guru.springframework.mrhpetclcinic.model.Owner;
 import guru.springframework.mrhpetclcinic.repository.OwnerRepository;
 import guru.springframework.mrhpetclcinic.repository.PetRepository;
 import guru.springframework.mrhpetclcinic.repository.PetTypeRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -40,6 +42,12 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
+        Set<Owner> owners = new HashSet<>();
+        ownerRepository.findAll().forEach(owners::add);
+        return owners;
+    }
+
+    public Set<Owner> findAllOwner() {
         Set<Owner> owners = new HashSet<>();
         ownerRepository.findAll().forEach(owners::add);
         return owners;

@@ -3,6 +3,7 @@ package guru.springframework.mrhpetclcinic.controller;
 import guru.springframework.mrhpetclcinic.model.Vet;
 import guru.springframework.mrhpetclcinic.service.VetServiceImp;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.VetService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,14 +22,14 @@ public class VetRestController {
 
     //http://localhost:7070//rest/vets//listOfAllVet/
     @RequestMapping({"/listOfAllVet"})
-    public Set<Vet> listVets() {
-        return vetService.findAll();
+    public ResponseEntity<Set<Vet>> listVets() {
+        return new ResponseEntity<>(vetService.findAll(), HttpStatus.OK);
     }
 
     //http://localhost:7070//rest/vets///findByVetId/{id}/
     @RequestMapping({"/findByVetId/{id}/"})
-    public Vet findVetId(@PathVariable(name = "id") Long id) {
-        return vetService.findById(id);
+    public ResponseEntity<Vet> findVetId(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(vetService.findById(id),HttpStatus.OK);
     }
 
     //http://localhost:7070//rest/vets/addVetWithResponseEntity/
@@ -39,14 +40,14 @@ public class VetRestController {
 
     //http://localhost:7070//rest/vets/add/
     @PostMapping("/add/")
-    public Vet addVet(@RequestBody Vet vet){
-        return vetService.save(vet);
+    public ResponseEntity<Vet> addVet(@RequestBody Vet vet){
+        return new ResponseEntity<>(vetService.save(vet),HttpStatus.CREATED);
     }
 
     //http://localhost:7070/rest/vets/{vetId}/update/
     @PutMapping("/{vetId}/update/")
-    public Vet updateVet(@RequestBody Vet vet,@PathVariable (name = "vetId") Long vetId){
-        return  vetServiceImp.updateVetSpecialty(vet,vetId);
+    public ResponseEntity<Vet> updateVet(@RequestBody Vet vet,@PathVariable (name = "vetId") Long vetId){
+        return new ResponseEntity<>(vetServiceImp.updateVetSpecialty(vet,vetId), HttpStatus.OK);
     }
     //http://localhost:7070/rest/vets//{vetId}/delete/
     @DeleteMapping("/{vetId}/delete/")

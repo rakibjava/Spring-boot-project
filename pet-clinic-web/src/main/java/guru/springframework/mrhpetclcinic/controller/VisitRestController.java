@@ -5,6 +5,7 @@ import guru.springframework.mrhpetclcinic.model.Visit;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.OwnerService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.PetService;
 import guru.springframework.mrhpetclcinic.service.serviceinterface.VisitService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,36 +27,36 @@ public class VisitRestController {
     // http://localhost:7070//pet/visit/
     @GetMapping
     @RequestMapping("/visit")
-    public Set<Visit> getAllVisit(){
+    public ResponseEntity<Set<Visit>> getAllVisit(){
         Set<Visit> visits = visitService.findAll();
-        return visits;
+        return new ResponseEntity<>(visits, HttpStatus.OK);
     }
 
     // http://localhost:7070//pet/{petid}/visit/
     @PostMapping
     @RequestMapping("/{petId}/visit/")
-    public Pet addVisit(@RequestBody Visit visit, @PathVariable(name = "petId") Long petId){
+    public ResponseEntity<Pet> addVisit(@RequestBody Visit visit, @PathVariable(name = "petId") Long petId){
         Pet petByVisit = petService.findById(petId);
         visit.setPet(petByVisit);
         visitService.save(visit);
         //visit.setPet(petByVisit);
        // petByVisit.getVisits().add(visit);
         //petService.save(petByVisit);
-        return petByVisit;
+        return new ResponseEntity<>(petByVisit,HttpStatus.CREATED);
     }
 
     // http://localhost:7070//pet//{petId}/visit/{visitId}/
     @PutMapping
     @RequestMapping("/{petId}/visit/{visitId}/")
-    public Pet updateVisit (@PathVariable(name = "petId") Long petId,@PathVariable(name = "visitId") Long visitId,
-                            @RequestBody Visit visit){
+    public ResponseEntity<Pet> updateVisit (@PathVariable(name = "petId") Long petId,
+                                            @PathVariable(name = "visitId") Long visitId,@RequestBody Visit visit){
         Pet pet = petService.findById(petId);
         Visit visit1 = visitService.findById(visitId);
         visit1.setDescription(visit.getDescription());
         visit1.setDate(visit.getDate());
         visitService.save(visit1);
         visit1.setPet(pet);
-        return  pet;
+        return  new ResponseEntity<>(pet,HttpStatus.OK);
     }
 
     // http://localhost:7070//pet/visit/delete/{visitId}/

@@ -3,6 +3,8 @@ package guru.springframework.mrhpetclcinic.controller;
 
 import guru.springframework.mrhpetclcinic.ManyToMany.VetM2M;
 import guru.springframework.mrhpetclcinic.ManyToMany.VetM2mService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,23 +21,23 @@ public class VetM2MRestController {
 
     //http://localhost:7070/vet_specialty/getAllVet/
     @GetMapping("/getAllVet/")
-    public List<VetM2M> getAllVet(){
+    public ResponseEntity<List<VetM2M>> getAllVet(){
         List<VetM2M> vetM2MS = vetM2mService.findAll();
-        return vetM2MS;
+        return new ResponseEntity<>(vetM2MS, HttpStatus.OK);
     }
 
     //http://localhost:7070/vet_specialty/getAllVetSortByLastName/
     @GetMapping("/getAllVetSortByLastName/")
-    public List<VetM2M> getAllVetByLastNameSorting(){
+    public ResponseEntity<List<VetM2M>> getAllVetByLastNameSorting(){
         List<VetM2M> vetM2MS = vetM2mService.findAllSortByLastName();
-        return vetM2MS;
+        return new ResponseEntity<>(vetM2MS,HttpStatus.OK);
     }
 
     //http://localhost:7070/vet_specialty/addVet/
     @PostMapping("/addVet/")
-    public VetM2M addVet(@RequestBody VetM2M vetM2M){
+    public ResponseEntity<VetM2M> addVet(@RequestBody VetM2M vetM2M){
         VetM2M vetM2M1 = vetM2mService.save(vetM2M);
-        return vetM2M1;
+        return new ResponseEntity<>(vetM2M1,HttpStatus.CREATED);
     }
 
 }
